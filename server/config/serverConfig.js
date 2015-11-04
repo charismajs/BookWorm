@@ -15,7 +15,7 @@ var server = require('http').createServer(app);
 var config = require('./config');
 var router = require('./../routers/router')(express, config);
 
-app.use(express.static(config.rootPath + '/public'));
+app.use(express.static(config.path.client));
 app.use(logger('combined'));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,7 +25,7 @@ app.use(cookieParser());
 
 app.use('/', router);
 
-app.set('views', path.join(config.rootPath, 'views'));
+app.set('views', path.join(config.path.server, '/views'));
 app.set('view engine', 'jade');
 app.engine('html', engines.jade);
 

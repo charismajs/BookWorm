@@ -10,7 +10,7 @@ module.exports = function(express, config) {
 
   router.route('/partials/*')
     .get(function(req, res) {
-      res.render(config.rootPath + '/public/app/' + req.params[0]);
+      res.render(config.path.client + '/' + req.params[0]);
     });
 
   router.route('/')
