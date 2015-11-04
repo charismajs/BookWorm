@@ -34,9 +34,12 @@
 
       $("#barcodeFileInput").on("change", function(e) {
         $("#codeResult").text(" ");
-        var files = e.target.files;
+        var files = e.target.files, file;
+        var canvas = document.querySelector("#picture");
+        var ctx = canvas.getContext("2d");
+
         if (files && files.length > 0) {
-          var file = files[0];
+          file = files[0];
           try {
             var URL = window.URL || window.webkitURL;
             var imageURL = URL.createObjectURL(file);
@@ -45,9 +48,28 @@
           catch(e) {
             try {
               var fileReader = new FileReader();
+
               fileReader.onload = function(event) {
                 $("#picturePreview").attr("src", event.target.result);
               };
+
+              fileReader.onloadend = function(event) {
+                var exif = EXIF.readFromBinaryFile(new BinaryFile(this.result));
+
+                switch(exif.Orientation){
+
+                  case 8:
+                    ctx.rotate(90*Math.PI/180);
+                    break;
+                  case 3:
+                    ctx.rotate(180*Math.PI/180);
+                    break;
+                  case 6:
+                    ctx.rotate(-90*Math.PI/180);
+                    break;
+                }
+              };
+
               fileReader.readAsDataURL(file);
             }
             catch(err) {
