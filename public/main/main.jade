@@ -3,11 +3,11 @@
 
 .container
   div
-    img(width="640", height="480", src="", id="picturePreview", style="border:1px solid black")
+    img(width="320", height="240", src="", id="picturePreview", style="border:1px solid black")
   div
     input(id="barcodeFileInput", type="file", accept="image/*;capture=camera")
   button.btn.btn-primary(id="startDecode") Decode
   div(id="codeResult")
-  canvas(id="picture", width="640", height="480")
+  canvas(id="picture", width="320", height="240")
 
 

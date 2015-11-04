@@ -54,18 +54,17 @@
               };
 
               fileReader.onloadend = function(event) {
-                var exif = EXIF.readFromBinaryFile(new BinaryFile(this.result));
+                var exif = EXIF.readFromBinaryFile(new BinaryFile(event.target.result));
 
                 switch(exif.Orientation){
-
                   case 8:
-                    ctx.rotate(90*Math.PI/180);
+                    ctx.rotate(90 * Math.PI / 180);
                     break;
                   case 3:
-                    ctx.rotate(180*Math.PI/180);
+                    ctx.rotate(180 * Math.PI / 180);
                     break;
                   case 6:
-                    ctx.rotate(-90*Math.PI/180);
+                    ctx.rotate(-90 * Math.PI / 180);
                     break;
                 }
               };
