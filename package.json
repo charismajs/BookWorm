@@ -1,0 +1,23 @@
+{
+  "name": "bookworm",
+  "version": "0.5.0",
+  "description": "private library",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/charismajs/BookWorm.git"
+  },
+  "keywords": [
+    "library",
+    "book"
+  ],
+  "author": "CMetal,LuckyJS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/charismajs/BookWorm/issues"
+  },
+  "homepage": "https://github.com/charismajs/BookWorm"
+}
