@@ -89,7 +89,7 @@
         },
         tracking: true,
         locator: {
-          patchSize: "x-large",
+          patchSize: "medium",
           halfSample: false
         },
         decoder: {
