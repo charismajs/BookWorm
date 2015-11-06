@@ -55,6 +55,7 @@
 
               fileReader.onloadend = function(event) {
                 var exif = EXIF.readFromBinaryFile(new BinaryFile(event.target.result));
+                console.log("EXIF : ", exif);
 
                 switch(exif.Orientation){
                   case 8:
