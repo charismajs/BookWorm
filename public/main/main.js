@@ -35,8 +35,9 @@
       $("#barcodeFileInput").on("change", function(e) {
         $("#codeResult").text(" ");
         var files = e.target.files, file;
-        var canvas = document.querySelector("#picture");
+        var canvas = $("#picture");
         var ctx = canvas.getContext("2d");
+
 
         if (files && files.length > 0) {
           file = files[0];
@@ -56,6 +57,7 @@
               fileReader.onloadend = function(event) {
                 var exif = EXIF.readFromBinaryFile(new BinaryFile(event.target.result));
                 console.log("EXIF : ", exif);
+                $("#debug").text(exif.orientation);
 
                 switch(exif.Orientation){
                   case 8:
@@ -77,21 +79,24 @@
             }
           }
         }
+
       });
     }
 
-    function detachListeners() {
-      $("#startDecode").off("click");
-    }
+    //function detachListeners() {
+    //  $("#startDecode").off("click");
+    //}
 
     function decode(src) {
       console.log("Decode");
+      console.log("Source : ", src);
+
       Quagga.decodeSingle({
         inputStream: {
           size: 640,
           singleChannel: false
         },
-        location: {
+        locator: {
           patchSize: "large",
           halfSample: false
         },
@@ -99,6 +104,7 @@
           readers: ["upc_reader", "code_128_reader", "code_39_reader", "code_39_vin_reader", "ean_8_reader", "ean_reader", "upc_e_reader", "codabar_reader"]
         },
         locate: true,
+        visual: true,
         src: src
       }, function(result) {
         if (result && result.codeResult && result.codeResult.code) {
@@ -110,8 +116,8 @@
       })
     }
 
-    function stop() {
-      Quagga.stop();
-    }
+    //function stop() {
+    //  Quagga.stop();
+    //}
   }
 })();
