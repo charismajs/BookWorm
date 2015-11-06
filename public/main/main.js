@@ -14,6 +14,7 @@
     var vm = this;
 
     var picture = $("#picture");
+    var picturePreview = document.getElementById("picturePreview");
     //var currentFile;
 
     vm.replaceResult = function(img) {
@@ -22,6 +23,7 @@
         content = $("<span>Loading image file failed</span>")
       } else {
         content = $("<img>").append().attr("src", img.src || img.toDataURL());
+        picturePreview.setAttribute("src", img.src || img.toDataURL());
       }
       picture.children().replaceWith(content);
     };
