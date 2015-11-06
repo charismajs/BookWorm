@@ -22,8 +22,8 @@
       if (!(img.src || img instanceof HTMLCanvasElement)) {
         content = $("<span>Loading image file failed</span>")
       } else {
-        content = $("<img>").append().attr("src", img.src || img.toDataURL());
         picturePreview.setAttribute("src", img.src || img.toDataURL());
+        content = $("<img>").append().attr("src", img.src || img.toDataURL());
       }
       picture.children().replaceWith(content);
     };
