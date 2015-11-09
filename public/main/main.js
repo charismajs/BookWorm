@@ -21,6 +21,25 @@
     var config = {
       "default": {
         inputStream: {
+          size: 1920
+          //singleChannel: false
+        },
+        ////tracking: true,
+        locator: {
+          patchSize: "small",
+          halfSample: true
+        },
+        decoder: {
+          //readers: ["ean_reader", "upc_reader", "code_128_reader", "code_39_reader", "code_39_vin_reader", "ean_8_reader", "upc_e_reader", "codabar_reader"]
+          readers: ["ean_reader"]
+        },
+        locate: true,
+        numOfWorkers: 4,
+        //visual: true,
+        src: src
+      },
+      "stream": {
+        inputStream: {
           name: "Test",
           type: "ImageStream",
           length: 10,
@@ -41,25 +60,6 @@
           patchSize: "small",
           halfSample: false
         }
-      },
-      "test": {
-        inputStream: {
-          size: 1920
-          //singleChannel: false
-        },
-        ////tracking: true,
-        locator: {
-          patchSize: "small",
-          halfSample: true
-        },
-        decoder: {
-          //readers: ["ean_reader", "upc_reader", "code_128_reader", "code_39_reader", "code_39_vin_reader", "ean_8_reader", "upc_e_reader", "codabar_reader"]
-          readers: ["ean_reader"]
-        },
-        locate: true,
-        numOfWorkers: 4,
-        //visual: true,
-        src: src
       }
     };
 
@@ -112,7 +112,7 @@
 
     function init() {
       attachListeners();
-      quaggaInit();
+      //quaggaInit();
     }
 
     function attachListeners() {
@@ -128,8 +128,8 @@
         if (img) {
           var tmpImageUrl = img.getAttribute("src");
         }
-        //decode(tmpImageUrl);
-        start();
+        decode(tmpImageUrl);
+        //start();
       });
     }
 
@@ -137,25 +137,9 @@
       console.log("Decode");
       console.log("Source : ", src);
 
-      Quagga.decodeSingle({
-        inputStream: {
-          size: 1920
-          //singleChannel: false
-        },
-        ////tracking: true,
-        locator: {
-          patchSize: "small",
-          halfSample: true
-        },
-        decoder: {
-          //readers: ["ean_reader", "upc_reader", "code_128_reader", "code_39_reader", "code_39_vin_reader", "ean_8_reader", "upc_e_reader", "codabar_reader"]
-          readers: ["ean_reader"]
-        },
-        locate: true,
-        numOfWorkers: 4,
-        //visual: true,
-        src: src
-      }, function(result) {
+      Quagga.decodeSingle(
+        config.default,
+        function(result) {
         if (result && result.codeResult && result.codeResult.code) {
           $("#codeResult").text("Code : " + result.codeResult.code);
         }
