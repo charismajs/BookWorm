@@ -24,10 +24,10 @@
           name: "Test",
           type: "ImageStream",
           length: 10,
-          size: 800
+          size: 1920
         },
         locator: {
-          patchSize: "medium",
+          patchSize: "small",
           halfSample: true
         }
       },
@@ -166,7 +166,7 @@
     }
 
     function quaggaInit() {
-      Quagga.init(config.test, function() {
+      Quagga.init(config.default, function() {
         start();
       });
     }
