@@ -34,9 +34,9 @@
           readers: ["ean_reader"]
         },
         locate: true,
-        numOfWorkers: 4,
+        numOfWorkers: 4
         //visual: true,
-        src: src
+        //src: src
       },
       "stream": {
         inputStream: {
@@ -94,6 +94,8 @@
       };
 
       if (!file) return;
+      $("#codeResult").text("ready to read");
+
       loadImage.parseMetaData(file, function(data) {
         if (data.exif) {
           options.orientation = data.exif.get("Orientation");
@@ -138,7 +140,7 @@
       console.log("Source : ", src);
 
       Quagga.decodeSingle(
-        config.default,
+        angular.extend(config.default, {src: src}),
         function(result) {
         if (result && result.codeResult && result.codeResult.code) {
           $("#codeResult").text("Code : " + result.codeResult.code);
