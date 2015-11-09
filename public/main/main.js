@@ -41,6 +41,25 @@
           patchSize: "small",
           halfSample: false
         }
+      },
+      "test": {
+        inputStream: {
+          size: 1920
+          //singleChannel: false
+        },
+        ////tracking: true,
+        locator: {
+          patchSize: "small",
+          halfSample: true
+        },
+        decoder: {
+          //readers: ["ean_reader", "upc_reader", "code_128_reader", "code_39_reader", "code_39_vin_reader", "ean_8_reader", "upc_e_reader", "codabar_reader"]
+          readers: ["ean_reader"]
+        },
+        locate: true,
+        numOfWorkers: 4,
+        //visual: true,
+        src: src
       }
     };
 
@@ -93,7 +112,7 @@
 
     function init() {
       attachListeners();
-      //quaggaInit();
+      quaggaInit();
     }
 
     function attachListeners() {
@@ -109,8 +128,8 @@
         if (img) {
           var tmpImageUrl = img.getAttribute("src");
         }
-        decode(tmpImageUrl);
-        //start();
+        //decode(tmpImageUrl);
+        start();
       });
     }
 
@@ -147,7 +166,7 @@
     }
 
     function quaggaInit() {
-      Quagga.init(config.default, function() {
+      Quagga.init(config.test, function() {
         start();
       });
     }
